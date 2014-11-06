@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <title>Wire Frame</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header">
+        <h1>iOS Demo</h1>
+    </div><!-- /header -->
+    <div data-role="content">
+        <h3>Requests</h3>
+        <p><a href="#send_thether" data-role="button" data-theme="c">Send Thether Request</a></p>
+        <h3>Friends</h3>
+        <ul data-role="listview">
+            <li>Friend A</li>
+            <li>Friend B</li>
+            <li>Friend C</li>
+            <li>Friend D</li>
+        </ul>
+        <br>
+        <p><a href="#add_friend" data-role="button" data-theme="c">Add Friends</a></p>
+    </div><!-- /content -->
+    <div data-role="footer">
+        <h4>Soarlogic Information Technology</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+<div data-role="page" id="add_friend" data-add-back-btn="true">
+    <header data-role="header">
+        <h1>iOS Demo</h1>
+    </header>
+
+    <div data-role="content">
+        <h3>Add New Friend</h3>
+        <form id="add_friend_form" action="#final_page">
+            <div data-role="fieldcontain">
+                <label for="email">
+                    <em>* </em> Name: </label>
+                <input type="text" id="email"
+                       name="name" class="required" />
+            </div>
+            <div data-role="fieldcontain">
+                <label for="phone_number">
+                    <em>* </em>Phone Number: </label>
+                <input type="text" id="phone_number"
+                       name="phone_number" class="required" />
+            </div>
+            <div class="ui-body ui-body-b">
+                <button class="btnSubmit" type="button" id="add_frnd"
+                        data-theme="a">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div data-role="page" id="send_thether" data-add-back-btn="true">
+    <header data-role="header">
+        <h1>iOS Demo</h1>
+    </header>
+
+    <div data-role="content">
+        <h3>Send Thether</h3>
+        <form id="send_thether_form" action="index.html#final_page">
+            <div data-role="fieldcontain">
+                <label for="phone_number">
+                    <em>* </em>Phone Number: </label>
+                <input type="text" id="phone_number"
+                       name="phone_number" class="required" />
+            </div>
+            <div class="ui-body ui-body-b">
+                <button class="btnSubmit" type="submit" id="send_the"
+                        data-theme="a">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div data-role="page" id="final_page" data-add-back-btn="true">
+    <header data-role="header">
+        <h1>iOS Demo</h1>
+    </header>
+
+    <div data-role="content">
+        <h3>Final Page</h3>
+        <form id="final">
+            <p><a href="#" data-role="button" data-theme="c">Accept</a></p>
+            <p><a href="#" data-role="button" data-theme="c">Lead</a></p>
+            <p><a href="#" data-role="button" data-theme="c">Follow</a></p>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    function confirmDialog(text, callback) {
+        var popupDialogId = 'popupDialog';
+        $('<div data-role="popup" id="' + popupDialogId + '" data-confirmed="no" data-transition="pop" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:500px;"> \
+                        <div data-role="header" data-theme="a">\
+                            <h2></h2>\
+                        </div>\
+                        <div role="main" class="ui-content">\
+                            <h3 class="ui-title"> New Friend added. </h3>\
+                            <button class="btnSubmit optionConfirm" type="submit" data-theme="a"  data-rel="back">Ok</button>\
+                        </div>\
+                    </div>').appendTo($.mobile.pageContainer);
+        var popupDialogObj = $('#' + popupDialogId);
+        popupDialogObj.trigger('create');
+        popupDialogObj.popup({
+
+        });
+        popupDialogObj.popup('open');
+        popupDialogObj.find(".optionConfirm").first().on('click', function () {
+            popupDialogObj.popup('close');
+        });
+    }
+
+    $('#add_frnd').on('click', function (e) {
+        e.preventDefault();
+        confirmDialog();
+    });
+    $('#send_the').on('click', function (e) {
+        e.preventDefault();
+        $.mobile.changePage("#final_page");
+    });
+</script>
+</body>
+</html>
